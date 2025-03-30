@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from eth_account import Account
 from eth_account.signers.local import LocalAccount
 
-from contracts/slp_abi import slp_token_abi
+from contracts.slp_abi import slp_token_abi
 
 load_dotenv()
 privateKey = os.getenv("PRIVATE_KEY") #dev account
@@ -76,5 +76,4 @@ if __name__ == "__main__":
     # payouts automatic
     # define amount SLP, AXS to send to another address
     # input amount, address (share -> amount, also totalshare needs to be 100%)
-
 
