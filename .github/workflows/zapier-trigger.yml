@@ -1,0 +1,12 @@
+name: Zapier Trigger
+
+on:
+  repository_dispatch:
+    types: [zapier_trigger]
+
+jobs:
+  run-something:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo from Zapier
+        run: echo "This workflow was triggered by Zapier!"
