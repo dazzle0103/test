@@ -2,6 +2,7 @@ name: Sheets
 
 on:
   repository_dispatch:
+  workflow_dispatch:
   
 jobs:
   update-sheet:
