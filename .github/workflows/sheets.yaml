@@ -3,20 +3,41 @@ name: Zapier Trigger
 on:
   repository_dispatch:
   
-  jobs:
+jobs:
   update-sheet:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - name: Repository auschecken
+        uses: actions/checkout@v3
 
-      - name: Setup Python
+      - name: Python einrichten
         uses: actions/setup-python@v4
         with:
           python-version: '3.10'
 
-      - name: Install gspread
+      - name: Abhängigkeiten installieren
         run: pip install gspread oauth2client
 
-      - name: Zugriff auf Google Sheet
+      - name: Google Sheet aktualisieren
         env:
           GOOGLE_SHEETS_CREDENTIALS: ${{ secrets.GOOGLE_SHEETS_CREDENTIALS }}
+        run: |
+          echo "$GOOGLE_SHEETS_CREDENTIALS" > creds.json
+
+          python <<EOF
+          import gspread
+          from oauth2client.service_account import ServiceAccountCredentials
+
+          scope = [
+              "https://spreadsheets.google.com/feeds",
+              "https://www.googleapis.com/auth/drive"
+          ]
+          creds = ServiceAccountCredentials.from_json_keyfile_name("creds.json", scope)
+          client = gspread.authorize(creds)
+
+          # Öffne das Sheet nach Namen (muss exakt stimmen)
+          sheet = client.open("Axies").AtiaBlessing
+
+          # Neue Zeile anhängen
+          sheet.append_row(["Hallo von GitHub Actions!", "🎉"])
+          EOF
