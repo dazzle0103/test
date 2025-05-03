@@ -1,4 +1,9 @@
-jobs:
+name: Zapier Trigger
+
+on:
+  repository_dispatch:
+  
+  jobs:
   update-sheet:
     runs-on: ubuntu-latest
     steps:
