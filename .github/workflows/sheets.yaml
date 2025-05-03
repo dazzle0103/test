@@ -1,4 +1,4 @@
-name: Zapier Trigger
+name: Sheets
 
 on:
   repository_dispatch:
