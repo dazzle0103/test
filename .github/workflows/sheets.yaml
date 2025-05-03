@@ -37,7 +37,7 @@ jobs:
           client = gspread.authorize(creds)
 
           # Öffne das Sheet nach Namen (muss exakt stimmen)
-          sheet = client.open("Axies").AtiaBlessing
+          sheet = client.open("Axies").worksheet("AtiaBlessing")
 
           # Neue Zeile anhängen
           sheet.append_row(["Hallo von GitHub Actions!", "🎉"])
